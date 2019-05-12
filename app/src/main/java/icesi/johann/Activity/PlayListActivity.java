@@ -1,10 +1,7 @@
 package icesi.johann.Activity;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,6 +22,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import icesi.johann.Adapter.Adapter_Tracks;
 import icesi.johann.Entity.Playlist;
@@ -74,7 +72,15 @@ public class PlayListActivity extends AppCompatActivity implements Serializable 
         setContentView(R.layout.activity_play_list);
         tracks =new ArrayList<>();
         btn_back = findViewById(R.id.playlist_btn_back);
-        btn_back.setOnClickListener(v -> finishAffinity());
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(PlayListActivity.this, MainActivity.class);
+                startActivity(in);
+                finishAffinity();
+
+            }
+        });
 
         playlist_image=findViewById(R.id.playlist_image);
 
@@ -94,23 +100,29 @@ public class PlayListActivity extends AppCompatActivity implements Serializable 
                     JSONObject json = null;
                     try{
                         json= new JSONObject(response);
-                        JSONObject playlist_json_object = json.getJSONObject("data");
-                        Log.e("WOOOOOOOO", playlist_json_object.toString());
 
-                        //tracks_json = tracks_json_array.toString();
+                        JSONObject playlist_object = json.getJSONObject("tracks");
+                        JSONArray playlist_json_array= playlist_object.getJSONArray("data");
 
-                        playlist_json = playlist_json_object.toString();
+                        tracks_json = playlist_json_array.toString();
+
+                        playlist_json = json.toString();
 
                         selected_playlist = new Gson().fromJson(playlist_json, new TypeToken<Playlist>(){ }.getType());
-                        //tracks=new Gson().fromJson(tracks_json, new TypeToken<Track>(){}.getType());
+                        tracks=new Gson().fromJson(tracks_json, new TypeToken<List<Track>>(){}.getType());
 
                         adapter_tracks.setTracks(tracks);
 
                         Picasso.get().load(selected_playlist.getPicture_big()).into(playlist_image);
                         textView_playlist_name.setText(selected_playlist.getTitle());
-                        textView_playlist_description.setText(selected_playlist.getDescription());
-
-                        String number = selected_playlist.getNb_tracks()+"";
+                        String des = selected_playlist.getDescription();
+                        if(des.equals("")){
+                            textView_playlist_description.setText("No description provided");
+                        }
+                        else{
+                            textView_playlist_description.setText(des);
+                        }
+                        String number = selected_playlist.getNb_tracks()+" tracks";
                         textView_playlist_number_songs.setText(number);
 
                     }

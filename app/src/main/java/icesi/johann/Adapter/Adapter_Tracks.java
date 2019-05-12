@@ -55,12 +55,17 @@ public class Adapter_Tracks extends RecyclerView.Adapter<Adapter_Tracks.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolderSongs viewHolderSongs, int i) {
         selectedTrack = tracks.get(i);
-        Picasso.get().load(selectedTrack.getAlbum().getCover_medium()).into((ImageView)viewHolderSongs.root.findViewById(R.id.playlist_image));
-        ((TextView)viewHolderSongs.root.findViewById(R.id.item_songs_name)).setText(tracks.get(i).getTitle());
-        ((TextView)viewHolderSongs.root.findViewById(R.id.item_songs_artist)).setText(tracks.get(i).getArtist().getName());
-        ((TextView)viewHolderSongs.root.findViewById(R.id.item_songs_releaseYear)).setText(tracks.get(i).toString()+"");
-        viewHolderSongs.root.setOnClickListener(v -> {
+        Picasso.get().load(selectedTrack.getAlbum().getCover_medium()).into((ImageView)viewHolderSongs.root.findViewById(R.id.item_songs_image));
+        ((TextView)viewHolderSongs.root.findViewById(R.id.item_songs_name)).setText(selectedTrack.getTitle());
+        ((TextView)viewHolderSongs.root.findViewById(R.id.item_songs_artist)).setText(selectedTrack.getArtist().getName());
+        ((TextView)viewHolderSongs.root.findViewById(R.id.item_songs_releaseYear)).setText(selectedTrack.getRelease_date() + " \uD83C\uDF1F");
 
+
+        viewHolderSongs.root.setOnClickListener(v -> {
+            Intent in = new Intent(viewHolderSongs.root.getContext(), TrackActivity.class);
+            in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            in.putExtra("track_id", selectedTrack.getId());
+            context.startActivity(in);
         });
 
 

@@ -1,4 +1,4 @@
-package icesi.johann.Activity;
+package icesi.johann.Entity;
 
 public class Artist {
 

@@ -19,6 +19,7 @@ public class Playlist implements Serializable {
     private User user;
 
     public Playlist() {
+
     }
 
     public Playlist(String id, String title, String description, int nb_tracks, String picture_small, String picture_big, User user) {

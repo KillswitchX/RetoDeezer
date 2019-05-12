@@ -1,10 +1,5 @@
 package icesi.johann.Entity;
 
-import java.io.Serializable;
-
-import icesi.johann.Activity.Album;
-import icesi.johann.Activity.Artist;
-
 public class Track{
 
     private String id;
@@ -12,17 +7,23 @@ public class Track{
     private Artist artist;
     private int duration;
     private Album album;
+    private String rank;
 
     public Track() {
 
     }
 
-    public Track(String id, String title, Artist artist, int duration, Album album) {
+    public Track(String id, String title, Artist artist, int duration, Album album, String rank) {
         this.id = id;
         this.title = title;
         this.artist = artist;
         this.duration = duration;
         this.album = album;
+        this.rank=rank;
+    }
+
+    public String getRelease_date() {
+        return rank;
     }
 
     public String getId() {
@@ -65,5 +66,7 @@ public class Track{
         this.album = album;
     }
 
-
+    public void setRelease_date(String rank) {
+        this.rank=rank;
+    }
 }

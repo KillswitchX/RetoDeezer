@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_below="@id/main_linear_1"
-        android:layout_marginTop="25dp"
+
         android:background="@color/colorBrown"
         android:orientation="horizontal"
         android:gravity="center"
