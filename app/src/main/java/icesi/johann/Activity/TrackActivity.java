@@ -1,6 +1,7 @@
 package icesi.johann.Activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
@@ -56,11 +57,22 @@ public class TrackActivity extends AppCompatActivity{
         editText_duration = findViewById(R.id.track_duration);
         btn_listen = findViewById(R.id.btn_listen);
         btn_back.setOnClickListener(v -> {
-            Intent in = new Intent(TrackActivity.this, MainActivity.class);
-            startActivity(in);
+
+            TrackActivity.this.onBackPressed();
+//            Intent in = new Intent(TrackActivity.this, MainActivity.class);
+//            startActivity(in);
         });
         btn_listen.setOnClickListener(v -> {
-
+            Intent launchIntent = getPackageManager().getLaunchIntentForPackage("deezer.android.app");
+            if (launchIntent != null) {
+                String uri = "deezer://www.deezer.com/track/"+getIDTrack();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(intent);
+            }
+            else{
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.deezer.com/track/"+getIDTrack()));
+                startActivity(browserIntent);
+            }
         });
 
         if(getIntent().hasExtra("track_id")){
@@ -86,7 +98,7 @@ public class TrackActivity extends AppCompatActivity{
                                     editText_name.setText(selectedTrack.getTitle());
                                     editText_artist.setText(selectedTrack.getArtist().getName());
                                     editText_album.setText(selectedTrack.getAlbum().getTitle());
-                                    editText_duration.setText("");
+                                    editText_duration.setText(selectedTrack.getDuration() + " Seconds");
 
 
                                 }
@@ -109,6 +121,10 @@ public class TrackActivity extends AppCompatActivity{
     public void loadImage(String image){
         Picasso.get().load(image).into(song_image);
 
+    }
+
+    public String getIDTrack(){
+        return selectedTrack.getId();
     }
 
 }

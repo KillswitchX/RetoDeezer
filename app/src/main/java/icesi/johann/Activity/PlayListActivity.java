@@ -75,9 +75,11 @@ public class PlayListActivity extends AppCompatActivity implements Serializable 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(PlayListActivity.this, MainActivity.class);
-                startActivity(in);
-                finishAffinity();
+                PlayListActivity.this.onBackPressed();
+
+//                Intent in = new Intent(PlayListActivity.this, MainActivity.class);
+//                startActivity(in);
+//                finishAffinity();
 
             }
         });
