@@ -1,54 +1,91 @@
 package icesi.johann.Entity;
 
-import android.graphics.drawable.Drawable;
+import java.io.Serializable;
 
-public class Playlist {
+public class Playlist implements Serializable {
 
-    private String name;
+    private String id;
 
-    private String owner;
+    private String title;
 
-    private int numberSongs;
+    private String description;
 
-    private Drawable image;
+    private int nb_tracks;
 
+    private String picture_small;
 
-    public Playlist(String name, String owner, int numberSongs, Drawable image) {
-        this.name = name;
-        this.owner = owner;
-        this.numberSongs = numberSongs;
-        this.image = image;
+    private String picture_big;
+
+    private User user;
+
+    public Playlist() {
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Playlist(String id, String title, String description, int nb_tracks, String picture_small, String picture_big, User user) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.nb_tracks = nb_tracks;
+        this.picture_small = picture_small;
+        this.picture_big = picture_big;
+        this.user = user;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+
+    public String getId() {
+        return id;
     }
 
-    public void setNumberSongs(int numberSongs) {
-        this.numberSongs = numberSongs;
+    public String getTitle() {
+        return title;
     }
 
-    public void setImage(Drawable image) {
-        this.image = image;
+    public String getDescription() {
+        return description;
     }
 
-    public String getName() {
-        return name;
+    public int getNb_tracks() {
+        return nb_tracks;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getPicture_small() {
+        return picture_small;
     }
 
-    public int getNumberSongs() {
-        return numberSongs;
+    public String getPicture_big() {
+        return picture_big;
     }
 
-    public Drawable getImage() {
-        return image;
+    public User getUser() {
+        return user;
+    }
+
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setNb_tracks(int nb_tracks) {
+        this.nb_tracks = nb_tracks;
+    }
+
+    public void setPicture_small(String picture_small) {
+        this.picture_small = picture_small;
+    }
+
+    public void setPicture_big(String picture_big) {
+        this.picture_big = picture_big;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -1,6 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:layout_height="match_parent" android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/colorGrey"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/colorFucsia"
+        android:id="@+id/playlist_linear_1"
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/back"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:id="@+id/playlist_btn_back"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search tracks"
+            android:textColor="#FFFFFF"
+            android:textSize="25dp"
+
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@id/playlist_linear_1"
+        android:layout_marginTop="25dp"
+        android:background="@color/colorBrown"
+        android:orientation="vertical"
+        android:id="@+id/playlist_linear_2"
+        >
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:id="@+id/playlist_image"
+            android:background="@color/colorFucsia"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name of the Playlist"
+            android:textColor="#FFFFFF"
+            android:textSize="30dp"
+            android:id="@+id/playlist_editText_name"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:hint="Playlist description..."
+            android:textColorHint="#FFFFFF"
+            android:id="@+id/playlist_editText_description"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:hint="(# of tracks)"
+            android:textColorHint="#FFFFFF"
+            android:id="@+id/playlist_editText_numberSongs"
+            />
+
+
+
+
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/playlist_linear_2"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorGrey"
+        android:id="@+id/playlist_recycler"
+        >
+
+
+
+    </android.support.v7.widget.RecyclerView>
+
+
+
 
 
 
