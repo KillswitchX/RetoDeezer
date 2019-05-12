@@ -65,44 +65,50 @@ public class TrackActivity extends AppCompatActivity{
 
         if(getIntent().hasExtra("track_id")){
             String track_id= getIntent().getStringExtra("track_id");
-            if (!track_id.equals("")){
-                new Thread(() -> new Service_REST_Manager.GET_Track(track_id, response -> runOnUiThread(() -> {
-                  JSONObject json = null;
-                        try{
+                new Thread(() -> {
 
-                        json = new JSONObject(response);
-                        String track_json = json.toString();
+                    new Service_REST_Manager.GET_Track(track_id, new Service_REST_Manager.GET_Track.OnResponseListener() {
+                        @Override
+                        public void onResponse(String response) {
 
+                            runOnUiThread(() -> {
 
-                        selectedTrack = new Gson().fromJson(track_json, new TypeToken<Track>(){}.getType());
+                                JSONObject json = null;
+                                try{
 
-                        //loadImage(selectedTrack.getAlbum().getCover_medium());
-                        editText_name.setText(selectedTrack.getTitle());
-                        editText_artist.setText(selectedTrack.getArtist().getName());
-                        editText_album.setText(selectedTrack.getAlbum().getTitle());
-                        editText_duration.setText(selectedTrack.getDuration());
+                                    json = new JSONObject(response);
+                                    String track_json = json.toString();
 
 
-                      }
-                      catch(JSONException e){
-                          Log.e(">>>>>>>>", e.getMessage());
-                      }
+                                    selectedTrack = new Gson().fromJson(track_json, new TypeToken<Track>(){}.getType());
 
-        }))).start();
-            }
-            else{
-                Toast.makeText(this, "wtf", Toast.LENGTH_LONG).show();
+                                    loadImage(selectedTrack.getAlbum().getCover_medium());
+                                    editText_name.setText(selectedTrack.getTitle());
+                                    editText_artist.setText(selectedTrack.getArtist().getName());
+                                    editText_album.setText(selectedTrack.getAlbum().getTitle());
+                                    editText_duration.setText("");
 
-            }
+
+                                }
+                                catch(JSONException e){
+                                    Log.e(">>>>>>>>", e.getMessage());
+                                }
+
+                            });
+
+                        }
+                    });
+
+                }).start();
 
         }
 
 
     }
-//
-//    public void loadImage(String image){
-//        Picasso.get().load(image).into(song_image);
-//
-//    }
+
+    public void loadImage(String image){
+        Picasso.get().load(image).into(song_image);
+
+    }
 
 }
