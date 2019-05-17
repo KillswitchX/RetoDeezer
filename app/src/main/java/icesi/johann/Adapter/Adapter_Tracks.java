@@ -4,20 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-
-import icesi.johann.Activity.PlayListActivity;
 import icesi.johann.Activity.TrackActivity;
 import icesi.johann.Entity.Track;
 import icesi.johann.R;
@@ -25,8 +19,6 @@ import icesi.johann.R;
 public class Adapter_Tracks extends RecyclerView.Adapter<Adapter_Tracks.ViewHolderSongs> implements Serializable {
 
     private ArrayList<Track> tracks;
-
-    private Track selectedTrack;
 
     private Context context;
 
@@ -54,17 +46,16 @@ public class Adapter_Tracks extends RecyclerView.Adapter<Adapter_Tracks.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderSongs viewHolderSongs, int i) {
-        selectedTrack = tracks.get(i);
-        Picasso.get().load(selectedTrack.getAlbum().getCover_medium()).into((ImageView)viewHolderSongs.root.findViewById(R.id.item_songs_image));
-        ((TextView)viewHolderSongs.root.findViewById(R.id.item_songs_name)).setText(selectedTrack.getTitle());
-        ((TextView)viewHolderSongs.root.findViewById(R.id.item_songs_artist)).setText(selectedTrack.getArtist().getName());
-        ((TextView)viewHolderSongs.root.findViewById(R.id.item_songs_releaseYear)).setText(selectedTrack.getRelease_date() + " \uD83C\uDF1F");
+        Picasso.get().load(getTracks().get(i).getAlbum().getCover_medium()).into((ImageView)viewHolderSongs.root.findViewById(R.id.item_songs_image));
+        ((TextView)viewHolderSongs.root.findViewById(R.id.item_songs_name)).setText(getTracks().get(i).getTitle());
+        ((TextView)viewHolderSongs.root.findViewById(R.id.item_songs_artist)).setText(getTracks().get(i).getArtist().getName());
+        ((TextView)viewHolderSongs.root.findViewById(R.id.item_songs_releaseYear)).setText(getTracks().get(i).getRelease_date() + " \uD83C\uDF1F");
 
 
         viewHolderSongs.root.setOnClickListener(v -> {
             Intent in = new Intent(viewHolderSongs.root.getContext(), TrackActivity.class);
             in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            in.putExtra("track_id", selectedTrack.getId());
+            in.putExtra("track_id", getTracks().get(i).getId());
             context.startActivity(in);
         });
 

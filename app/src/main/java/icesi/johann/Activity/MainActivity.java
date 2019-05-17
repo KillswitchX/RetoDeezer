@@ -2,24 +2,20 @@ package icesi.johann.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import icesi.johann.Adapter.Adapter_Playlist;
 import icesi.johann.Entity.Playlist;
 import icesi.johann.R;
@@ -47,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView= findViewById(R.id.main_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
+                DividerItemDecoration.VERTICAL));
         playlists= new ArrayList<>();
         editText_playlist=findViewById(R.id.main_edittext_playlist);
         btn_search=findViewById(R.id.main_btn_search);

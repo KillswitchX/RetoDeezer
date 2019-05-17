@@ -1,9 +1,8 @@
 package icesi.johann.Activity;
 
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,19 +10,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import icesi.johann.Adapter.Adapter_Tracks;
 import icesi.johann.Entity.Playlist;
 import icesi.johann.Entity.Track;
@@ -51,14 +46,6 @@ public class PlayListActivity extends AppCompatActivity implements Serializable 
     private ArrayList<Track> tracks;
 
     private Adapter_Tracks adapter_tracks;
-
-    private Drawable image;
-
-    private String name;
-
-    private String description;
-
-    private String number;
 
     private String tracks_json;
 
@@ -94,6 +81,8 @@ public class PlayListActivity extends AppCompatActivity implements Serializable 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter_tracks);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
+                DividerItemDecoration.VERTICAL));
 
         if(getIntent().hasExtra("Playlist_id")){
             playlist_id = getIntent().getStringExtra("Playlist_id");

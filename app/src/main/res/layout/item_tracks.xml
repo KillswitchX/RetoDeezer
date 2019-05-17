@@ -6,6 +6,8 @@
     android:id="@+id/item_songs_linear"
     >
 
+
+
     <ImageView
         android:layout_width="90dp"
         android:layout_height="90dp"
@@ -31,13 +33,14 @@
             android:id="@+id/item_songs_name"
             android:textSize="20dp"
             android:layout_marginTop="10dp"
+            android:textStyle="bold"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Artist"
             android:id="@+id/item_songs_artist"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_marginTop="5dp"
             />
         <TextView
@@ -45,7 +48,7 @@
             android:layout_height="wrap_content"
             android:text="Release year"
             android:id="@+id/item_songs_releaseYear"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_marginTop="5dp"
             />
 

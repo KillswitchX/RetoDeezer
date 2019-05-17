@@ -25,10 +25,6 @@ public class Adapter_Playlist extends RecyclerView.Adapter<Adapter_Playlist.View
 
     private ArrayList<Playlist> playlist;
 
-    private Playlist selectedPlaylist;
-
-    private int index;
-
     private Context context;
 
     public Adapter_Playlist(ArrayList<Playlist> playlist, Context context){
@@ -57,16 +53,16 @@ public class Adapter_Playlist extends RecyclerView.Adapter<Adapter_Playlist.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderPlayList viewHolderPlayList, int i) {
-        selectedPlaylist = playlist.get(index);
-        Picasso.get().load(selectedPlaylist.getPicture_small()).into((ImageView) viewHolderPlayList.root.findViewById(R.id.item_playlist_image));
-        ((TextView) viewHolderPlayList.root.findViewById(R.id.item_playlist_name)).setText(selectedPlaylist.getTitle());
-        ((TextView) viewHolderPlayList.root.findViewById(R.id.item_playlist_owner)).setText(selectedPlaylist.getUser().getName());
-        ((TextView) viewHolderPlayList.root.findViewById(R.id.item_playlist_numberSongs)).setText(selectedPlaylist.getNb_tracks()+"");
-        index=i;
+
+        Picasso.get().load(playlist.get(i).getPicture_small()).into((ImageView) viewHolderPlayList.root.findViewById(R.id.item_playlist_image));
+        ((TextView) viewHolderPlayList.root.findViewById(R.id.item_playlist_name)).setText(playlist.get(i).getTitle());
+        ((TextView) viewHolderPlayList.root.findViewById(R.id.item_playlist_owner)).setText(playlist.get(i).getUser().getName());
+        ((TextView) viewHolderPlayList.root.findViewById(R.id.item_playlist_numberSongs)).setText(playlist.get(i).getNb_tracks()+"");
+
         viewHolderPlayList.root.setOnClickListener(v -> {
             Intent in = new Intent(viewHolderPlayList.root.getContext(), PlayListActivity.class);
             in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            in.putExtra("Playlist_id", selectedPlaylist.getId());
+            in.putExtra("Playlist_id", playlist.get(i).getId());
             context.startActivity(in);
         });
 

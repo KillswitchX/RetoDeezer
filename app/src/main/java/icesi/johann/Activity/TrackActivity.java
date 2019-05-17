@@ -28,6 +28,8 @@ import icesi.johann.REST_Service.Service_REST_Manager;
 
 public class TrackActivity extends AppCompatActivity{
 
+    public static String TRACK_URL="://www.deezer.com/track/";
+
     private Button btn_back;
 
     private ImageView song_image;
@@ -65,12 +67,12 @@ public class TrackActivity extends AppCompatActivity{
         btn_listen.setOnClickListener(v -> {
             Intent launchIntent = getPackageManager().getLaunchIntentForPackage("deezer.android.app");
             if (launchIntent != null) {
-                String uri = "deezer://www.deezer.com/track/"+getIDTrack();
+                String uri = "deezer"+TRACK_URL+getIDTrack();
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                 startActivity(intent);
             }
             else{
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.deezer.com/track/"+getIDTrack()));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https"+TRACK_URL+getIDTrack()));
                 startActivity(browserIntent);
             }
         });

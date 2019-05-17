@@ -31,13 +31,14 @@
             android:id="@+id/item_playlist_name"
             android:textSize="20dp"
             android:layout_marginTop="10dp"
+            android:textStyle="bold"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Owner name"
             android:id="@+id/item_playlist_owner"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_marginTop="5dp"
             />
         <TextView
@@ -45,13 +46,12 @@
             android:layout_height="wrap_content"
             android:text="Number of tracks"
             android:id="@+id/item_playlist_numberSongs"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_marginTop="5dp"
             />
 
-
-
     </LinearLayout>
+
 
 
 
